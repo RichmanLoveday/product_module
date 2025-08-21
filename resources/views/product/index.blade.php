@@ -48,7 +48,8 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="#" class="dropdown-item"><img
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="dropdown-item"><img
                                                         src="{{ asset('assets/img/icons/edit.svg') }}" class="me-2"
                                                         alt="img">Edit</a>
                                             </li>
