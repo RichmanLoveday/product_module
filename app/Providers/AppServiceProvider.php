@@ -27,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
             return $user->id === $product->user_id;
         });
 
+        //? Gate to check if the user can update a product
+        Gate::define('can-update-product', function (User $user, Product $product) {
+            return $user->id === $product->user_id;
+        });
+
         //? Gate to check if the user can delete the product
         Gate::define('can-delete-product', function (User $user, Product $product) {
             return $user->id === $product->user_id;
