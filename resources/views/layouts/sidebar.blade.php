@@ -19,9 +19,13 @@
      </a>
 
      <ul class="nav user-menu">
-         <li class="nav-item dropdown has-arrow main-drop">
-             <a class="dropdown-item logout pb-0" href="#"><img src="{{ asset('assets/img/icons/log-out.svg') }}"
-                     class="me-2" alt="img">Logout</a>
+         <form method="POST" action="{{ route('logout') }}">
+             @csrf
+             <button type="submit" class="dropdown-item logout pb-0 mt-3"
+                 style="background:none; border:none; padding:0;">
+                 <img src="{{ asset('assets/img/icons/log-out.svg') }}" class="me-2" alt="img">Logout
+             </button>
+         </form>
          </li>
      </ul>
 

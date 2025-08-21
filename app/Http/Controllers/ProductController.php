@@ -4,15 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the products based on a unique authenticated user
      */
-    public function index()
+    public function index(): View
     {
-        //
+        //? fetch products for the authenticated user
+        $products = Product::where('user_id', Auth::id())
+            ->latest()
+            ->paginate(10);
+
+        //  dd($products->toArray());
+
+        //? return the view with products
+        return view('product.index', compact('products'));
     }
 
     /**

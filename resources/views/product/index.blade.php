@@ -21,43 +21,49 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Position</th>
+                                <th>Description</th>
                                 <th>Photo</th>
                                 <th>Date Added</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Pitt</td>
-                                <td>Graphic Designer</td>
-                                <td>
-                                    <div class="" style="width: 50px; height:50px;">
-                                        <img src="{{ asset('assets/img/customer/customer1.jpg') }}" alt="product">
-                                    </div>
-                                </td>
-                                <td>1st Jan, 2025</td>
-                                <td class="text-center">
-                                    <a class="action-set" href="javascript:void(0);" data-bs-toggle="dropdown"
-                                        aria-expanded="true">
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#" class="dropdown-item"><img
-                                                    src="{{ asset('assets/img/icons/edit.svg') }}" class="me-2"
-                                                    alt="img">Edit</a>
-                                        </li>
+                            @forelse ($products as $product)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ Str::limit($product->description, 50) }}</td>
+                                    <td>
+                                        <div style="width: 50px; height:50px;">
+                                            <img src="{{ $product->image }}" alt="product"
+                                                style="width:100%; height:100%; object-fit:cover;">
+                                        </div>
+                                    </td>
+                                    <td>{{ $product->created_at->format('jS M, Y') }}</td>
 
-                                        <li>
-                                            <a href="sales-details.html" class="dropdown-item"><img
-                                                    src="{{ asset('assets/img/icons/eye1.svg') }}" class="me-2"
-                                                    alt="img">Delete</a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
+                                    <td class="text-center">
+                                        <a class="action-set" href="javascript:void(0);" data-bs-toggle="dropdown"
+                                            aria-expanded="true">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#" class="dropdown-item"><img
+                                                        src="{{ asset('assets/img/icons/edit.svg') }}" class="me-2"
+                                                        alt="img">Edit</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="sales-details.html" class="dropdown-item"><img
+                                                        src="{{ asset('assets/img/icons/eye1.svg') }}" class="me-2"
+                                                        alt="img">Delete</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>
