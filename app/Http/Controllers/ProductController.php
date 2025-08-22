@@ -24,7 +24,7 @@ class ProductController extends Controller
         //? fetch products for the authenticated user
         $products = Product::where('user_id', Auth::id())
             ->latest()
-            ->paginate(10);
+            ->paginate(3);
 
         //  dd($products->toArray());
 

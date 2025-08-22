@@ -69,4 +69,6 @@
                 </div>
             </div>
         </div>
+
+        {{ $products->onEachSide(1)->links('common-component.pagination') }}
     @endsection
