@@ -45,9 +45,9 @@
 </head>
 
 <body>
-    <div id="global-loader">
+    {{-- <div id="global-loader">
         <div class="whirly-loader"> </div>
-    </div>
+    </div> --}}
 
     <div class="main-wrapper">
 
@@ -100,6 +100,61 @@
             });
         </script>
     @endif
+
+    <script>
+        const csrf = $('meta[name="csrf-token"]').attr('content');
+
+        $('.delete-item').on('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        type: 'DELETE',
+                        contentType: "application/json",
+                        headers: {
+                            "X-CSRF-TOKEN": csrf,
+                            "Accept": "application/json",
+                        },
+                        beforeSend: function() {
+                            $(this).prop('disabled', true);
+                        },
+                        success: function(res) {
+                            if (res.success) {
+                                //? Show success message
+                                swalWithBootstrapButtons.fire({
+                                    title: "Deleted!",
+                                    text: res.message,
+                                    icon: "success"
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                toastr.error(res.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            if (xhr.status === 500) {
+                                toastr.error('An error occurred while deleting advert');
+                            }
+                        },
+                        complete: function() {
+                            $(this).prop('disabled', false);
+                        }
+                    });
+                }
+            })
+        });
+    </script>
 
     @stack('scripts')
 

@@ -120,7 +120,7 @@ class ProductController extends Controller
         //? Delete the product from the database
         $product->delete();
 
-        //? Redirect back to the products index with success message
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+        //? Return a JSON response indicating success
+        return response()->json(['success' => true, 'message' => 'Product deleted successfully.']);
     }
 }

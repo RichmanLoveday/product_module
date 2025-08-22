@@ -54,7 +54,8 @@
                                             </li>
 
                                             <li>
-                                                <a href="sales-details.html" class="dropdown-item"><img
+                                                <a href="{{ route('products.destroy', $product->id) }}"
+                                                    class="dropdown-item  delete-item"><img
                                                         src="{{ asset('assets/img/icons/eye1.svg') }}" class="me-2"
                                                         alt="img">Delete</a>
                                             </li>
@@ -62,6 +63,9 @@
                                     </td>
                                 </tr>
                             @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">No products found.</td>
+                                </tr>
                             @endforelse
 
                         </tbody>
