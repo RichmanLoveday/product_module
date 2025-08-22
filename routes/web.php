@@ -4,14 +4,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('product.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+//? redirect to login page on accessing the root URL
+Route::redirect('/', '/login');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/products', ProductController::class);
