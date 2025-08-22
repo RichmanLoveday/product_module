@@ -83,7 +83,7 @@ class ProductController extends Controller
     {
 
         //? Check if the authenticated user can edit the product
-        if (Gate::denies('can-edit-product', $product)) {
+        if (Gate::denies('can-update-product', $product)) {
             abort(403, 'You do not have permission to edit this product.');
         }
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product.
      */
     public function destroy(Product $product)
     {
@@ -114,10 +114,10 @@ class ProductController extends Controller
             abort(403, 'You do not have permission to delete this product.');
         }
 
-        //? Remove the product image from storage
+        //? Remove the image file from storage
         $this->removeImage($product->image);
 
-        //? Delete the product from database
+        //? Delete the product from the database
         $product->delete();
 
         //? Redirect back to the products index with success message
